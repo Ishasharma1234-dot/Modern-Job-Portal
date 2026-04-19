@@ -1,0 +1,74 @@
+{% extends "bsbase.html" %}
+{% block title %} Jobs-JobPortal {% endblock %}
+{% block content %} 
+<div class="container">
+    <br>
+    <div class="card mb-3">
+      <div class="card-header"><h4 class="text-primary">Profile Details</h4></div>
+      <div class="card-body">
+    
+        <h5 class="card-title text-secondary">College</h5>
+        {% if profile_details[1] %}
+        <p class="card-text"> {{ profile_details[1] }} </p>
+        {% else %}
+        <p class="card-text text-muted"> None </p>
+        {% endif %}
+    
+        <h5 class="card-title text-secondary">Department</h5>
+        {% if profile_details[2] %}
+        <p class="card-text"> {{ profile_details[2] }} </p>
+        {% else %}
+        <p class="card-text text-muted"> None </p>
+        {% endif %}
+    
+        <h5 class="card-title text-secondary">Education Details</h5>
+        {% if profile_details[3] %}
+        <p class="card-text"> {{ profile_details[3] }} </p>
+        {% else %}
+        <p class="card-text text-muted"> None </p>
+        {% endif %}
+    
+        <h5 class="card-title text-secondary">Resume</h5>
+        {% if resume_details[1] %}
+        <p class="card-text"> {{ resume_details[1] }} </p>
+        {% else %}
+        <p class="card-text text-muted"> Not Uploaded </p>
+        {% endif %}
+        <br>
+        <a href="{{url_for('manageprofile')}}" class="btn btn-primary">Manage Profile</a>
+      </div>
+    </div>
+    
+    <br>
+    <h3 class="text-sm-left" style="margin-left:10px;"> Applied Jobs </h3>
+    <br> 
+      {% if applied_jobs %}
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Sr. No.</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Category</th>
+            <th scope="col">Company</th>
+            <th scope="col">Location</th>
+            <th scope="col">Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for job in applied_jobs %}
+            <tr>
+              <td>{{ loop.index }}</td>
+                <td>{{ job[0] }}</td>
+                <td>{{ job[1] }}</td>
+                <td>{{ job[2] }}</td>
+                <td>{{ job[3] }}</td>
+                <td>{{ job[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p style="margin-left: 10px; font-size: 20px;">You haven't applied to any jobs yet</p>
+      {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "bsbase.html" %}
+{% block title %} Jobsearch-JobPortal {% endblock %}
+{% block content %}
+<div class="container">
+    <br>
+    <h3 class="text-sm-left" style="margin-left:20px;"> Search Results </h3>
+    <br>
+    {%if jobsearch %}
+    {% for job in jobsearch %}
+    <div class="card mb-3">
+      <h5 class="card-header">{{ job[0] }}</h5>
+      <div class="card-body">
+        <p class="card-text text-secondary"><strong>Category:</strong> {{ job[1] }}</p>
+        <p class="card-text"><strong>Company:</strong> {{ job[2] }}</p>
+        <p class="card-text"><strong>Location:</strong> {{ job[3] }}</p>
+        <p class="card-text text-primary"><strong>Salary:</strong> {{ job[4] }}</p>
+        <p class="card-text"><strong>Job Description:</strong> <br> {{ job[5] }}</p>
+        <form action="{{ url_for('apply') }}" method = "POST">
+          <input type="hidden" name='j_id' value = "{{ job[6] }}">
+          <input type = "submit" value = "Apply Now" class = "btn btn-primary">
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p style="margin-left: 20px; font-size: 20px;" class="text-muted">No search results found.</p>
+    {% endif %}
+</div>
+{% endblock %}
